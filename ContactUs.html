@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About & Contact Us</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+   #menu-toggle {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .menu-links {
+        left: -250px;
+        transition: left 0.2s ease;
+      }
+
+      #menu-toggle:checked ~ .navbar .menu-links {
+        left: 0;
+      }
+    }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 40px 0;
+        }
+
+        section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #6f4e37;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            color: #555;
+        }
+
+        .contact-info p {
+            margin: 10px 0;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+}
+header .navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.navbar .logo {
+  color: rgb(43, 4, 4);
+  font-weight: 600;
+  font-size: 2.1rem;
+  text-decoration: none;
+}
+.navbar .logo span {
+  color: #C06B3E;
+}
+.navbar .menu-links {
+  display: flex;
+  list-style: none;
+  gap: 35px;
+}
+.navbar a {
+  color: rgb(43, 4, 4);
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+.navbar a:hover {
+  color: #C06B3E;
+}
+#hamburger-btn {
+  color: rgb(62, 8, 8);
+  cursor: pointer;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 10px;
+  }
+  header.show-mobile-menu::before {
+    content: "";
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+  }
+  .navbar .logo {
+    font-size: 1.7rem;
+  }
+    
+  #hamburger-btn, #close-menu-btn {
+    display: block;
+  }
+  .navbar .menu-links {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100vh;
+    background: #fff;
+    flex-direction: column;
+    padding: 70px 40px 0;
+    transition: left 0.2s ease;
+  }
+  header.show-mobile-menu .navbar .menu-links {
+    left: 0;
+  }
+
+    </style>
+</head>
+<body>
+    <header>
+
+  <!--  checkbox -->
+  <input type="checkbox" id="menu-toggle">
+
+  <nav class="navbar">
+
+    <a class="logo" href="#">Coffee<span>.</span></a>
+
+    <!-- hamburger -->
+    <label for="menu-toggle" id="hamburger-btn" class="material-symbols-outlined">
+      menu
+    </label>
+
+    <ul class="menu-links">
+
+      <!-- close button -->
+      <label for="menu-toggle" id="close-menu-btn" class="material-symbols-outlined">
+        close
+      </label>
+
+      <li><a href="index.html">Home</a></li>
+      <li><a href="product.html">Products</a></li>
+      <li><a href="ContactUs.html">About us</a></li>
+      <li><a href="ContactUs.html">Contact us</a></li>
+
+    </ul>
+
+  </nav>
+</header>
+
+
+<body><br>
+    <div class="container">
+
+        <!-- About Us Section -->
+        <section id="about">
+            <h1>About Us</h1>
+            <h2>Welcome to Coffee House</h2>
+            <p>
+                At Coffee House, we are passionate about serving high-quality coffee
+                made from carefully selected coffee beans. Our mission is to create
+                a warm and comfortable place where customers can relax, work, or
+                spend time with friends and family.
+            </p>
+
+            <p>
+                We believe that every cup of coffee should bring happiness and a
+                memorable experience.
+            </p>
+        </section>
+
+        <!-- Contact Us Section -->
+        <section id="contact">
+            <h1>Contact Us</h1>
+            <h2>Get in Touch</h2>
+
+            <p>We would love to hear from you!</p>
+
+            <div class="contact-info">
+                <p>📍 Address: 123 Coffee Street, Phnom Penh, Cambodia</p>
+                <p>📞 Phone: +855 123 456 56</p>
+                <p>📧 Email: info@coffeehouse.com</p>
+                <p>🕒 Opening Hours: Monday – Sunday, 7:00 AM – 10:00 PM</p>
+            </div>
+
+            <p>
+                Feel free to contact us for any questions, feedback, or inquiries.
+                We are always happy to assist you.
+            </p>
+        </section> 
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    #menu-toggle {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .menu-links {
+        left: -250px;
+        transition: left 0.2s ease;
+      }
+
+      #menu-toggle:checked ~ .navbar .menu-links {
+        left: 0;
+      }
+    }
+/* Importing Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+}
+header .navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.navbar .logo {
+  color: rgb(43, 4, 4);
+  font-weight: 600;
+  font-size: 2.1rem;
+  text-decoration: none;
+}
+.navbar .logo span {
+  color: #C06B3E;
+}
+.navbar .menu-links {
+  display: flex;
+  list-style: none;
+  gap: 35px;
+}
+.navbar a {
+  color: rgb(43, 4, 4);
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+.navbar a:hover {
+  color: #C06B3E;
+}
+#hamburger-btn {
+  color: rgb(62, 8, 8);
+  cursor: pointer;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 10px;
+  }
+  header.show-mobile-menu::before {
+    content: "";
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+  }
+  .navbar .logo {
+    font-size: 1.7rem;
+  }
+    
+  #hamburger-btn, #close-menu-btn {
+    display: block;
+  }
+  .navbar .menu-links {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100vh;
+    background: #fff;
+    flex-direction: column;
+    padding: 70px 40px 0;
+    transition: left 0.2s ease;
+  }
+  header.show-mobile-menu .navbar .menu-links {
+    left: 0;
+  }
+
+    </style>
+</head>
+<body>
+     <header>
+
+  <!--  checkbox -->
+  <input type="checkbox" id="menu-toggle">
+
+  <nav class="navbar">
+
+    <a class="logo" href="#">Coffee<span>.</span></a>
+
+    <!-- hamburger -->
+    <label for="menu-toggle" id="hamburger-btn" class="material-symbols-outlined">
+      menu
+    </label>
+
+    <ul class="menu-links">
+
+      <!-- close button -->
+      <label for="menu-toggle" id="close-menu-btn" class="material-symbols-outlined">
+        close
+      </label>
+
+      <li><a href="index.html">Home</a></li>
+      <li><a href="product.html">Products</a></li>
+      <li><a href="ContactUs.html">About us</a></li>
+      <li><a href="ContactUs.html">Contact us</a></li>
+
+    </ul>
+
+  </nav>
+</header>
+
+    <section class="products-section">
+    <div class="container">
+        <h2 class="">Our Products</h2>
+
+        <div class="product-grid">
+
+         <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=500" alt="Espresso">
+            <h3>Espresso</h3>
+            <p>Strong and rich coffee made from premium beans.</p>
+            <button>Order Now</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1497636577773-f1231844b336?w=500" alt="Cappuccino">
+                <h3>Cappuccino</h3>
+                <p>Perfect blend of espresso, milk and foam.</p>
+                <button>Order Now</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500" alt="Latte">
+                <h3>Latte</h3>
+                <p>Smooth and creamy coffee for everyday enjoyment.</p>
+                <button>Order Now</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500" alt="Mocha">
+                <h3>Mocha</h3>
+                <p>Chocolate flavored coffee with a delicious taste.</p>
+                <button>Order Now</button>
+            </div>
+
+            
+    
+</body>
+</html>
