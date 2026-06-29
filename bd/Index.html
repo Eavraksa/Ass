@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Muyeng 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: #0d0d1a;
+    font-family: 'Quicksand', sans-serif;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  /* Stars background */
+  .stars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite alternate;
+  }
+  @keyframes twinkle {
+    from { opacity: 0.2; transform: scale(1); }
+    to { opacity: 1; transform: scale(1.4); }
+  }
+
+  /* Floating hearts */
+  .hearts-container {
+    position: fixed;
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .heart {
+    position: absolute;
+    bottom: -40px;
+    font-size: 1.4rem;
+    animation: floatUp linear infinite;
+    opacity: 0;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.5; }
+    100% { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
+  }
+
+  /* Main card */
+  .card {
+    position: relative;
+    z-index: 10;
+    max-width: 520px;
+    width: 100%;
+    margin: 20px auto;
+    background: linear-gradient(160deg, #1a0b2e 0%, #16213e 50%, #0f3460 100%);
+    border-radius: 28px;
+    padding: 40px 32px;
+    border: 1.5px solid rgba(255,150,220,0.25);
+    box-shadow: 0 0 60px rgba(180,80,220,0.25), 0 0 120px rgba(100,80,200,0.1);
+    text-align: center;
+  }
+
+  /* Photo frame */
+  .photo-frame-wrapper {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 28px;
+  }
+  .photo-frame {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    padding: 5px;
+    background: linear-gradient(135deg, #f9a8d4, #c084fc, #818cf8, #f9a8d4);
+    animation: spinGradient 4s linear infinite;
+  }
+  @keyframes spinGradient {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+  }
+  .photo-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #1a1a2e;
+    border: 4px solid #1a1a2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s;
+  }
+  .photo-inner:hover { transform: scale(1.04); }
+  .photo-inner img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .photo-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.75rem;
+    font-family: 'Quicksand', sans-serif;
+  }
+  .photo-placeholder .icon { font-size: 2.4rem; }
+  .photo-placeholder span { line-height: 1.4; }
+
+  /* Hidden file input */
+  #photoInput { display: none; }
+
+  /* Corner ornaments on frame */
+  .frame-ornament {
+    position: absolute;
+    font-size: 1.3rem;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .frame-ornament.top-left { top: -6px; left: -6px; }
+  .frame-ornament.top-right { top: -6px; right: -6px; animation-delay: 0.5s; }
+  .frame-ornament.bottom-left { bottom: -6px; left: -6px; animation-delay: 1s; }
+  .frame-ornament.bottom-right { bottom: -6px; right: -6px; animation-delay: 1.5s; }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+  }
+
+  /* Upload label */
+  .upload-label {
+    font-size: 0.72rem;
+    color: rgba(249,168,212,0.7);
+    margin-top: -12px;
+    margin-bottom: 18px;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .upload-label:hover { color: #f9a8d4; }
+
+  /* Title */
+  .happy-birthday {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.8rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #f9a8d4, #c084fc, #818cf8, #f9a8d4);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+    line-height: 1.1;
+  }
+  @keyframes shimmer {
+    0% { background-position: 0%; }
+    100% { background-position: 200%; }
+  }
+
+  .name {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.4rem;
+    font-weight: 700;
+    color: #fde68a;
+    text-shadow: 0 0 20px rgba(253,230,138,0.5), 0 0 40px rgba(253,230,138,0.2);
+    margin-top: 4px;
+  }
+
+  /* Age badge */
+  .age-badge {
+    display: inline-block;
+    margin: 18px auto;
+    padding: 8px 22px;
+    background: rgba(249,168,212,0.1);
+    border: 1px solid rgba(249,168,212,0.3);
+    border-radius: 50px;
+    color: #f9a8d4;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  /* Message */
+  .message {
+    color: rgba(255,255,255,0.82);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin: 20px 0;
+    font-weight: 400;
+  }
+  .message .highlight {
+    color: #f9a8d4;
+    font-weight: 600;
+  }
+
+  /* Countdown */
+  .countdown-section {
+    margin-top: 28px;
+    padding: 20px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .countdown-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 14px;
+  }
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+  .countdown-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 54px;
+  }
+  .countdown-num {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #f9a8d4;
+    line-height: 1;
+  }
+  .countdown-unit {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.4);
+  }
+  .sep {
+    font-size: 1.6rem;
+    color: rgba(255,255,255,0.2);
+    align-self: flex-start;
+    padding-top: 4px;
+  }
+
+  /* Today badge */
+  .today-msg {
+    font-size: 1.3rem;
+    color: #fde68a;
+    font-weight: 600;
+    animation: bounce 0.7s ease-in-out infinite alternate;
+  }
+  @keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-6px); }
+  }
+
+  /* Candles row */
+  .candles {
+    font-size: 1.6rem;
+    margin: 22px 0 10px;
+    letter-spacing: 4px;
+    animation: flicker 1.5s ease-in-out infinite alternate;
+  }
+  @keyframes flicker {
+    from { opacity: 1; }
+    to { opacity: 0.75; }
+  }
+
+  /* Confetti burst button */
+  .burst-btn {
+    margin-top: 20px;
+    padding: 12px 32px;
+    background: linear-gradient(90deg, #c084fc, #f9a8d4);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 20px rgba(192,132,252,0.4);
+  }
+  .burst-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 28px rgba(192,132,252,0.55);
+  }
+  .burst-btn:active { transform: scale(0.97); }
+
+  /* Confetti canvas */
+  #confetti {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 28px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<!-- Stars -->
+<div class="stars" id="stars"></div>
+
+<!-- Floating hearts -->
+<div class="hearts-container" id="hearts"></div>
+
+<!-- Confetti canvas -->
+<canvas id="confetti"></canvas>
+
+<!-- Main card -->
+<div class="card">
+
+  <!-- Photo frame -->
+  <div class="photo-frame-wrapper">
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <div class="photo-placeholder" id="placeholder" style="display:none;"></div>
+        <img id="p" src="ing.jpg" alt="Muyeng" style="display:block;">
+      </div>
+    </div>
+    <span class="frame-ornament top-left">💖</span>
+    <span class="frame-ornament top-right">✨</span>
+    <span class="frame-ornament bottom-left">🌟</span>
+    <span class="frame-ornament bottom-right">💜</span>
+  </div>
+
+
+  <div class="happy-birthday">Happy Birthday</div>
+  <div class="name">Muyeng 🌸</div>
+
+  <div class="age-badge">🎂 Born June 29, 2007 · Turning 19 Today!</div>
+
+  <div class="candles">🕯️🎂🕯️</div>
+
+  <p class="message">
+    On this beautiful day, I want you to know how
+    <span class="highlight">incredibly special</span> you are to me.
+    Every moment with you feels like magic — you light up my world
+    in ways I never knew possible. 💫<br><br>
+    May your <span class="highlight">19th birthday</span> be as bright,
+    warm, and beautiful as your smile.
+    Here's to you, my love — today and every day.
+    <span class="highlight">I love you</span> more than words can say. 💜
+  </p>
+
+  <!-- Countdown / Today -->
+  <div class="countdown-section">
+    <div class="countdown-label" id="countdownLabel">🎉 Time until your birthday</div>
+    <div id="countdownDisplay"></div>
+  </div>
+
+  <button class="burst-btn" onclick="launchConfetti()">🎊 Celebrate!</button>
+
+  <div class="footer">Made with love for Muyeng · June 29 · Forever yours 💕</div>
+</div>
+
+<script>
+/* ---- Stars ---- */
+const starsEl = document.getElementById('stars');
+for (let i = 0; i < 120; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const sz = Math.random() * 2.5 + 0.5;
+  s.style.cssText = `
+    width:${sz}px; height:${sz}px;
+    top:${Math.random()*100}%;
+    left:${Math.random()*100}%;
+    animation-delay:${Math.random()*4}s;
+    animation-duration:${2+Math.random()*3}s;
+  `;
+  starsEl.appendChild(s);
+}
+
+/* ---- Floating hearts ---- */
+const heartsEl = document.getElementById('hearts');
+const emojis = ['💖','💜','✨','💕','🌸','⭐','💫','💝'];
+function spawnHeart() {
+  const h = document.createElement('div');
+  h.className = 'heart';
+  h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+  h.style.cssText = `
+    left:${Math.random()*100}%;
+    animation-duration:${5+Math.random()*6}s;
+    animation-delay:${Math.random()*2}s;
+    font-size:${0.9+Math.random()*1.2}rem;
+  `;
+  heartsEl.appendChild(h);
+  setTimeout(() => h.remove(), 12000);
+}
+setInterval(spawnHeart, 600);
+
+
+
+/* ---- Countdown ---- */
+function updateCountdown() {
+  const now = new Date();
+  const birthday = new Date(now.getFullYear(), 5, 29); // June = month 5
+  if (now > birthday) birthday.setFullYear(birthday.getFullYear() + 1);
+
+  const todayBday = now.getMonth() === 5 && now.getDate() === 29;
+  const display = document.getElementById('countdownDisplay');
+  const label = document.getElementById('countdownLabel');
+
+  if (todayBday) {
+    label.textContent = '';
+    display.innerHTML = '<div class="today-msg">🎉 Today is YOUR Day, Muyeng! 🎉</div>';
+    return;
+  }
+
+  const diff = birthday - now;
+  const days = Math.floor(diff / 86400000);
+  const hrs  = Math.floor((diff % 86400000) / 3600000);
+  const mins = Math.floor((diff % 3600000) / 60000);
+  const secs = Math.floor((diff % 60000) / 1000);
+
+  label.textContent = '⏳ Time until next birthday';
+  display.innerHTML = `
+    <div class="countdown-grid">
+      <div class="countdown-cell"><span class="countdown-num">${days}</span><span class="countdown-unit">Days</span></div>
+      <span class="sep">:</span>
+      <div class="countdown-cell"><span class="countdown-num">${String(hrs).padStart(2,'0')}</span><span class="countdown-unit">Hours</span></div>
+      <span class="sep">:</span>
+      <div class="countdown-cell"><span class="countdown-num">${String(mins).padStart(2,'0')}</span><span class="countdown-unit">Mins</span></div>
+      <span class="sep">:</span>
+      <div class="countdown-cell"><span class="countdown-num">${String(secs).padStart(2,'0')}</span><span class="countdown-unit">Secs</span></div>
+    </div>`;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+/* ---- Confetti ---- */
+const canvas = document.getElementById('confetti');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+
+let pieces = [];
+const colors = ['#f9a8d4','#c084fc','#818cf8','#fde68a','#6ee7b7','#fb923c','#f472b6'];
+
+function launchConfetti() {
+  for (let i = 0; i < 160; i++) {
+    pieces.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height * 0.5 - 20,
+      w: 8 + Math.random() * 8,
+      h: 4 + Math.random() * 5,
+      color: colors[Math.floor(Math.random()*colors.length)],
+      vx: (Math.random() - 0.5) * 5,
+      vy: 1 + Math.random() * 4,
+      rot: Math.random() * 360,
+      rv: (Math.random() - 0.5) * 6,
+      alpha: 1
+    });
+  }
+  if (!animating) animateConfetti();
+}
+
+let animating = false;
+function animateConfetti() {
+  if (!pieces.length) { animating = false; ctx.clearRect(0,0,canvas.width,canvas.height); return; }
+  animating = true;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  pieces.forEach(p => {
+    p.x += p.vx; p.y += p.vy; p.rot += p.rv; p.alpha -= 0.008;
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, p.alpha);
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot * Math.PI/180);
+    ctx.fillStyle = p.color;
+    ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+    ctx.restore();
+  });
+  pieces = pieces.filter(p => p.alpha > 0 && p.y < canvas.height + 20);
+  requestAnimationFrame(animateConfetti);
+}
+
+// Auto-launch on load
+setTimeout(launchConfetti, 600);
+</script>
+</body>
+</html>
